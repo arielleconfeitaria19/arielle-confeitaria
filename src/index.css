@@ -1,0 +1,172 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+.admin-container {
+  max-width: 1000px;
+}
+
+.form-depoimento {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 40px;
+  max-width: 400px;
+}
+
+.form-depoimento input,
+.form-depoimento textarea {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.form-depoimento button {
+  background: #4CAF50;
+  color: white;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.lista-depoimentos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 300px));
+  gap: 25px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.card-depoimento {
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-depoimento:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+.card-depoimento img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.card-depoimento img {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.card-depoimento img:hover {
+  transform: scale(1.05);
+}
+
+.card-depoimento h4 {
+  margin-top: 12px;
+  font-size: 18px;
+  color: #333;
+}
+.card-depoimento p {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.4;
+}
+
+.link-instagram {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #E1306C;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.link-instagram:hover {
+  text-decoration: underline;
+}
+
+.botoes {
+  margin-top: 10px;
+}
+
+.btn-excluir {
+  background: red;
+  color: white;
+  margin-left: 10px;
+}
+.titulo-depoimentos {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 35px;
+  color: #3d4b34;
+  position: relative;
+}
+
+.titulo-depoimentos::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: #cfa27a;
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+
+.depoimentos {
+  padding: 60px 20px;
+  background: #f7f7f7;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-imagem {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+}
+
+.fechar {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  font-size: 40px;
+  color: white;
+  cursor: pointer;
+}
+.modal-imagem {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+  animation: zoom 0.25s ease;
+}
+
+@keyframes zoom {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

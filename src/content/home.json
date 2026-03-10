@@ -1,0 +1,42 @@
+{
+  "titulo": "Arielle Confeitaria Artesanal",
+  "descricao": "Doces feitos com carinho para momentos especiais",
+  "cta": "Fazer pedido",
+  "produtos": [
+   
+    {
+      "nome": "Bolos personalizados",
+      "imagem": "bolo2.jpg"
+    },
+   
+    {
+      "nome": "Doces finos",
+      "imagem": "doces2.jpg"
+    },
+    
+    {
+      "nome": "Sobremesas para eventos",
+      "imagem": "sobremesa1.jpg"
+    }
+  ],
+  "fotos": [
+    "bolo3.jpg",
+    "doces1.jpg",
+    "sobremesa1.jpg",
+    "bolo03.jpg",
+    "doces2.jpg"
+
+  ],
+  "promocoes": [
+  {
+    "titulo": "Especial de Páscoa",
+    "descricao": "Ovos artesanais recheados com sabores exclusivos.",
+    "imagem": "pascoa2026.jpg"
+  },
+  {
+    "titulo": "Dia das Mães",
+    "descricao": "Bolos delicados e personalizados para um dia especial.",
+    "imagem": "dia-das-maes.jpg"
+  }
+]
+}
