@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
@@ -37,7 +37,7 @@ export default function App() {
 
         <Route
           path="/admin"
-          element={usuario ? <Admin /> : <Navigate to="/login" />}
+          element={usuario ? <Admin /> : <Navigate to="/login" replace />}
         />
       </Routes>
     </BrowserRouter>

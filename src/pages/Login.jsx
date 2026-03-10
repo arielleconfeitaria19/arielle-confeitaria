@@ -13,7 +13,7 @@ export default function Login() {
 
     try {
       await signInWithEmailAndPassword(auth, email, senha);
-      navigate("/admin");
+      navigate("/admin", { replace: true });
     } catch (error) {
       alert("Email ou senha inválidos");
     }
