@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
@@ -29,7 +29,7 @@ export default function App() {
   }
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<Home />} />
 
@@ -40,6 +40,6 @@ export default function App() {
           element={usuario ? <Admin /> : <Navigate to="/login" />}
         />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
