@@ -4,6 +4,7 @@ import { db } from "../firebase";
 
 export default function Galeria() {
   const [midias, setMidias] = useState([]);
+  const [midiaAberta, setMidiaAberta] = useState(null);
 
   useEffect(() => {
     async function buscarGaleria() {
@@ -21,10 +22,7 @@ export default function Galeria() {
   if (midias.length === 0) return null;
 
   return (
-    <section
-      id="galeria"
-      className="py-16 px-4 sm:px-8 md:px-16 bg-[#FDF9F7]"
-    >
+    <section id="galeria" className="py-16 px-4 sm:px-8 md:px-16 bg-[#FDF9F7]">
       <div className="max-w-6xl mx-auto text-center">
         <h3 className="text-2xl sm:text-3xl md:text-4xl font-serif text-[#6B7A5C] mb-10">
           Galeria
@@ -37,19 +35,50 @@ export default function Galeria() {
                 <img
                   src={item.url}
                   alt="Mídia da galeria"
-                  className="w-full h-40 sm:h-52 object-cover rounded-xl"
+                  className="w-full h-40 sm:h-52 object-cover rounded-xl cursor-pointer"
+                  onClick={() => setMidiaAberta(item)}
                 />
               ) : (
                 <video
                   src={item.url}
-                  className="w-full h-40 sm:h-52 object-cover rounded-xl"
-                  controls
+                  className="w-full h-40 sm:h-52 object-cover rounded-xl cursor-pointer"
+                  onClick={() => setMidiaAberta(item)}
                 />
               )}
             </div>
           ))}
         </div>
       </div>
+      {midiaAberta && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+          onClick={() => setMidiaAberta(null)}
+        >
+          <span
+            className="absolute top-5 right-8 text-white text-4xl cursor-pointer"
+            onClick={() => setMidiaAberta(null)}
+          >
+            ×
+          </span>
+
+          {midiaAberta.tipo === "image" ? (
+            <img
+              src={midiaAberta.url}
+              alt="Imagem ampliada"
+              className="max-h-[90%] max-w-[90%] rounded-lg"
+              onClick={(e) => e.stopPropagation()}
+            />
+          ) : (
+            <video
+              src={midiaAberta.url}
+              controls
+              autoPlay
+              className="max-h-[90%] max-w-[90%] rounded-lg"
+              onClick={(e) => e.stopPropagation()}
+            />
+          )}
+        </div>
+      )}
     </section>
   );
 }

@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { db } from "../firebase";
 import { collection, getDocs, query, where, orderBy } from "firebase/firestore";
+import ImageModal from "../components/ImageModal";
 
 export default function Promocoes() {
   const [promocoes, setPromocoes] = useState([]);
   const [carregando, setCarregando] = useState(true);
+  const [imagemAberta, setImagemAberta] = useState(null);
 
   useEffect(() => {
     async function buscarPromocoes() {
@@ -12,7 +14,7 @@ export default function Promocoes() {
         const q = query(
           collection(db, "promocoes"),
           where("ativo", "==", true),
-          orderBy("createdAt", "desc") // 🔥 mais recentes primeiro
+          orderBy("createdAt", "desc"), // 🔥 mais recentes primeiro
         );
 
         const querySnapshot = await getDocs(q);
@@ -72,6 +74,7 @@ export default function Promocoes() {
                   src={promo.imagemUrl}
                   alt={promo.titulo}
                   className="w-full h-64 object-cover"
+                  onClick={() => setImagemAberta(promo.imagemUrl)}
                 />
               )}
 
@@ -80,9 +83,7 @@ export default function Promocoes() {
                   {promo.titulo}
                 </h4>
 
-                <p className="text-gray-600 text-sm">
-                  {promo.descricao}
-                </p>
+                <p className="text-gray-600 text-sm">{promo.descricao}</p>
 
                 {promo.preco && (
                   <p className="text-lg font-bold text-[#C47A8A] mt-4">
@@ -92,7 +93,12 @@ export default function Promocoes() {
               </div>
             </div>
           ))}
+          
         </div>
+        <ImageModal
+            imagem={imagemAberta}
+            fechar={() => setImagemAberta(null)}
+          />
       </div>
     </section>
   );
