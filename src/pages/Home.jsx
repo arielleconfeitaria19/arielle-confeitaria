@@ -8,6 +8,7 @@ import WhatsAppFloat from "../components/WhatsAppFloat";
 import Sobre from "../components/Sobre";
 import Depoimentos from "../components/Depoimentos";
 import Promocoes from "../components/Promocoes";
+import ComoPedir from "../components/ComoPedir";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <Hero />
       <Sobre />
       <Promocoes />
+      <ComoPedir />
       <Produtos />
       <Galeria />
       <Depoimentos />
