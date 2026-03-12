@@ -73,7 +73,7 @@ export default function Promocoes() {
                 <img
                   src={promo.imagemUrl}
                   alt={promo.titulo}
-                  className="w-full h-64 object-cover"
+                  className="w-full h-64 object-cover cursor-pointer transition-transform duration-500 hover:scale-110"
                   onClick={() => setImagemAberta(promo.imagemUrl)}
                 />
               )}
@@ -86,19 +86,25 @@ export default function Promocoes() {
                 <p className="text-gray-600 text-sm">{promo.descricao}</p>
 
                 {promo.preco && (
-                  <p className="text-lg font-bold text-[#C47A8A] mt-4">
+                  <p className="text-2xl font-bold text-[#C47A8A] mt-4">
                     R$ {promo.preco.toFixed(2)}
                   </p>
                 )}
+                <a
+                  href="https://wa.me/5531991120258"
+                  target="_blank"
+                  className="mt-4 inline-block bg-[#6B7A5C] text-white px-5 py-2 rounded-full text-sm hover:bg-[#556347] transition"
+                >
+                  Encomendar
+                </a>
               </div>
             </div>
           ))}
-          
         </div>
         <ImageModal
-            imagem={imagemAberta}
-            fechar={() => setImagemAberta(null)}
-          />
+          imagem={imagemAberta}
+          fechar={() => setImagemAberta(null)}
+        />
       </div>
     </section>
   );
