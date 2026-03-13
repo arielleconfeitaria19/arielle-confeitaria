@@ -1,24 +1,24 @@
-import { siteConfig } from "../config/site";
+//import { siteConfig } from "../config/site";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#3E4A3C] text-white py-6 text-center">
+    <footer className="bg-[#3E4A3C] text-white p-4 text-center">
 
       <p>
-        © {new Date().getFullYear()} {siteConfig.nome}
+        © {new Date().getFullYear()} Arielle Confeitaria Artesanal
       </p>
 
-      <div className="mt-3">
+      <p className="text-sm mt-2">
+        Produzido por{" "}
         <a
-          href={`https://instagram.com/${siteConfig.instagram}`}
-
+          href="https://instagram.com/prospytech"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 bg-pink-500 hover:bg-pink-600 px-4 py-1 rounded-full text-sm transition"
+          className="underline hover:text-pink-300"
         >
-          Produzido por ProspyTech
+          ProspyTech
         </a>
-      </div>
+      </p>
 
     </footer>
   );
