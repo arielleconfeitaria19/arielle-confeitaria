@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  query,
+  limit,
+} from "firebase/firestore";
+
 import { db } from "../firebase";
 
 export default function Galeria() {
@@ -8,7 +14,10 @@ export default function Galeria() {
 
   useEffect(() => {
     async function buscarGaleria() {
-      const snapshot = await getDocs(collection(db, "galeria"));
+      // Limita quantidade inicial
+      const q = query(collection(db, "galeria"), limit(8));
+
+      const snapshot = await getDocs(q);
 
       const lista = snapshot.docs.map((doc) => ({
         id: doc.id,
@@ -24,26 +33,26 @@ export default function Galeria() {
   if (midias.length === 0) return null;
 
   return (
-    <section
-      id="galeria"
-      className="py-16 px-4 sm:px-8 md:px-16 bg-[#FDF9F7]"
-    >
+    <section className="py-16 px-4 bg-[#FDF9F7]">
       <div className="max-w-6xl mx-auto text-center">
-        <h3 className="text-2xl sm:text-3xl md:text-4xl font-serif text-[#6B7A5C] mb-10">
+        <h3 className="text-3xl font-serif text-[#6B7A5C] mb-10">
           Galeria
         </h3>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {midias.map((item) => (
             <div
               key={item.id}
-              className="relative group overflow-hidden rounded-xl"
+              className="relative overflow-hidden rounded-xl"
             >
               {item.tipo === "image" ? (
                 <img
                   src={item.url}
-                  alt="Mídia da galeria"
-                  className="w-full h-40 sm:h-52 object-cover rounded-xl cursor-pointer hover:scale-105 transition duration-300"
+                  loading="lazy"
+                  width="400"
+                  height="400"
+                  alt="Bolo artesanal"
+                  className="w-full h-40 sm:h-52 object-cover rounded-xl cursor-pointer"
                   onClick={() => setMidiaAberta(item)}
                 />
               ) : (
@@ -51,19 +60,15 @@ export default function Galeria() {
                   <video
                     src={item.url + "#t=0.1"}
                     poster={item.thumb}
-                    className="w-full h-40 sm:h-52 object-cover rounded-xl cursor-pointer"
-                    onClick={() => setMidiaAberta(item)}
+                    preload="none"
                     muted
                     playsInline
-                    preload="metadata"
+                    className="w-full h-40 sm:h-52 object-cover rounded-xl cursor-pointer"
+                    onClick={() => setMidiaAberta(item)}
                   />
 
-                  {/* Overlay escuro */}
-                  <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition duration-300 pointer-events-none" />
-
-                  {/* Ícone de play */}
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <div className="bg-black/60 rounded-full p-3 backdrop-blur-sm">
+                    <div className="bg-black/60 rounded-full p-3">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="white"
@@ -87,20 +92,11 @@ export default function Galeria() {
           className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4"
           onClick={() => setMidiaAberta(null)}
         >
-          {/* Botão fechar */}
-          <button
-            className="absolute top-5 right-5 text-white text-4xl z-50"
-            onClick={() => setMidiaAberta(null)}
-          >
-            ×
-          </button>
-
           {midiaAberta.tipo === "image" ? (
             <img
               src={midiaAberta.url}
               alt="Imagem ampliada"
-              className="max-h-[90vh] max-w-[95vw] rounded-xl"
-              onClick={(e) => e.stopPropagation()}
+              className="max-h-[90vh] max-w-[95vw]"
             />
           ) : (
             <video
@@ -108,8 +104,8 @@ export default function Galeria() {
               controls
               autoPlay
               playsInline
-              className="max-h-[90vh] max-w-[95vw] rounded-xl"
-              onClick={(e) => e.stopPropagation()}
+              preload="metadata"
+              className="max-h-[90vh] max-w-[95vw]"
             />
           )}
         </div>
